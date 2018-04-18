@@ -8,12 +8,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Django E-learning</title>
     <!-- all local versions of bootstrap css, jquery and bootstrap javascript -->
-    <link href="{% static 'bootstrap-3.3.7/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap-4.0.0/dist/css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                {% if request.user.is_authenticated %}
+                <p>
+                    Logged in as <a href="{% url 'student_detail' %}">{{ request.user.username }}</a>
+                    (<a href="{% url 'auth_django:logout' %}">Logout</a>)
+                </p>
+                {% else %}
+                <p>
+                    <a href="{% url 'auth_django:login' %}">Login</a>
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
     <!-- this Default Content block will be overwritten by the child templates -->
     {% block "content" %}Default Content{% endblock %}
-    <script src="{% static 'jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'bootstrap-3.3.7/dist/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery-1.12.4.js' %}"></script>
+    <script src="{% static 'bootstrap-4.0.0/dist/js/bootstrap.min.js' %}"></script>
 </body>
 </html>
